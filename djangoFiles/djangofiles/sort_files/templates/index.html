@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>File Sorter</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'fileUpload/style.css' %}">
+</head>
+<body>
+	<div class="container">
+		<h1>File Sorter</h1>
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="form-group">
+				<label for="folderSelect">Select Main Folder:</label>
+				<input type="file" id="folderSelect" name="folderSelect" webkitdirectory mozdirectory msdirectory odirectory directory required>
+			</div>
+			<div class="form-group">
+				<label for="sortBy">Sort by:</label><br>
+				<input type="radio" id="sortbySize" name="sortBy" value="size" onclick="showSizeDropdown()" required>
+				<label for="sortbySize">Size</label><br>
+				<input type="radio" id="sortbyCount" name="sortBy" value="count" onclick="showCountInput()">
+				<label for="sortbyCount">Number of files</label><br>
+			</div>
+			<div class="form-group" id="sizeDropdown">
+				<label for="sizeSelect">Select size:</label>
+				<select name="sizeSelect" id="sizeSelect">
+					<option value="2">Less than 2 MB</option>
+					<option value="20">Less than 20 MB</option>
+				</select>
+			</div>
+			<div class="form-group" id="countInput" style="display: none;">
+				<label for="countSelect">Enter number of files:</label>
+				<input type="number" id="countSelect" name="countSelect" min="1" max="9999">
+			</div>
+			<div class="form-group">
+				<label for="outputFolder">Select Output Folder:</label>
+				<input type="file" id="outputFolder" name="outputFolder" webkitdirectory mozdirectory msdirectory odirectory directory required>
+			</div>
+			<button type="submit" name="submit" class="btn">Sort Files</button>
+		</form>
+	</div>
+	<script type="text/javascript" src="{% static 'fileUpload/script.js' %}"></script>
+</body>
+</html>
